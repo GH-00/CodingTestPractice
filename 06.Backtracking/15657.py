@@ -6,16 +6,14 @@ N, M = map(int, input().split())
 arr = sorted(list(map(int, input().split())))
 res = []
 
-def backtrack():
+def backtrack(start):
     if len(res) == M:
         print(" ".join(map(str, res)))
         return
 
-    # for i in range(N) 은 가능
-    # for i in range(1, N + 1)은 불가능 -> 인덱스 범위 설정이 잘못됨
-    for i in range(0, N):
+    for i in range(start, N):
         res.append(arr[i])
-        backtrack()
+        backtrack(i)
         res.pop()
 
-backtrack()
+backtrack(0)
