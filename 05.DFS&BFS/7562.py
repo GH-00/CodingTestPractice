@@ -27,7 +27,7 @@ def bfs():
 
         # 목표 위치에 도달하면 최소 이동 횟수를 반환
         if x == endX and y == endY:
-            return matrix[x][y] - 1
+            return matrix[x][y] - 1 # 처음에 시작 위치의 이동 횟수를 1로 초기화 해서 1을 빼줘야함
 
         # 8가지 방향으로의 이동을 검사
         for i in range(8):
@@ -37,6 +37,7 @@ def bfs():
             # 유효한 범위 내에 있고, 아직 방문하지 않은 경우
             if 0 <= nx < n and 0 <= ny < n and matrix[nx][ny] == 0:
                 # 이동 횟수를 업데이트하고 큐에 새로운 위치를 추가
+                # 현재까지 이동 횟수에 1을 더한 값으로 갱신. 새로운 위치로 이동 하는데 필요한 최소 이동 횟수
                 matrix[nx][ny] = matrix[x][y] + 1
                 q.append((nx, ny))
 
