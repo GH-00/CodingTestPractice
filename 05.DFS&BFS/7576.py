@@ -3,9 +3,6 @@ from collections import deque
 import sys
 input = sys.stdin.readline
 
-# bfs 특 queue 사용하기
-# deque 모듈 안쓰면 시간복잡도 박살남(pop(0)이 시간복잡도가 O(n)이고 popleft()가 O(1)이라고 함)
-
 M, N = map(int, input().split())
 q = deque()
 
@@ -50,6 +47,7 @@ for line in graph:
             exit(0)
     # 다 익혔다면 최댓값이 정답
     res = max(res, max(line))
+
 # 처음 시작을 1로 표현했으니 1을 빼준다.
 print(res - 1)
 
