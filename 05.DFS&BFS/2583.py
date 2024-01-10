@@ -6,16 +6,15 @@ graph = [[0] * n for _ in range(m)]
 for _ in range(k):
     x1, y1, x2, y2 = map(int, input().split())
     for i in range(x1, x2):
-        for j in range(m - y1 - 1, m - y2 - 1, -1):
+        for j in range(y1, y2):
             graph[j][i] = 1
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
+queue = deque()
 
 def bfs(x, y):
-    global answer
-    queue = deque()
     queue.append((x, y))
     graph[x][y] = 1
     size = 1
@@ -39,5 +38,4 @@ for i in range(m):
 
 result.sort()
 print(len(result))
-for i in result:
-    print(i, end=' ')
+print(*result)
