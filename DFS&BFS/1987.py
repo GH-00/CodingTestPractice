@@ -1,31 +1,34 @@
 # 최장거리 출력
 # DFS / BFS
 import sys
-
 input = sys.stdin.readline
 
-n, m = map(int, input().split())
-graph = [input().rstrip() for _ in range(n)]
+r, c = map(int, input().split())
+maps = []
+for _ in range(r):
+    maps.append(list(input()))
 
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
+ans = 0
+alphas = set()
 
-def bfs(g):
-    result = 1
-    q = set()
-    # 현재 위치 x, y 지금까지 지나온 알파벳 문자열로 저장
-    q.add((0, 0, graph[0][0]))
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
-    while q and result != 26:
-        x, y, road = q.pop()
-        result = max(result, len(road))
+def dfs(x, y, count):
+    global ans
+    ans = max(ans, count)
 
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if 0 <= nx < n and 0 <= ny < m and g[nx][ny] not in road:
-                q.add((nx, ny, road + g[nx][ny]))
-    print(result)
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
 
+        if 0 <= nx < r and 0 <= ny < c and not maps[nx][ny] in alphas:
+            alphas.add(maps[nx][ny])
+            dfs(nx, ny, count+1)
+            alphas.remove(maps[nx][ny])
 
-bfs(graph)
+alphas.add(maps[0][0])
+
+dfs(0, 0, 1)
+
+print(ans)
