@@ -1,1 +1,18 @@
-# https://velog.io/@2yunseong/%EB%B0%B1%EC%A4%80-10799%EB%B2%88-%EC%87%A0%EB%A7%89%EB%8C%80%EA%B8%B0
+import sys
+input = sys.stdin.readline
+
+arr=list(map(str, input()))
+stack= []
+answer = 0
+
+for i in range(len(arr)):
+    if arr[i] == '(':
+        stack.append(arr[i])
+    elif arr[i] == ')':
+        if arr[i-1] == '(':
+            stack.pop()
+            answer +=len(stack)
+        elif arr[i-1] ==')':
+            stack.pop()
+            answer +=1
+print(answer)
